@@ -1,0 +1,2 @@
+DRAM,1,1,15G,posix
+APASS,1,1,128G,memkind/pmem

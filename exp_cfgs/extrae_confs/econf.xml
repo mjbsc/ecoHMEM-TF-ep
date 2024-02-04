@@ -1,0 +1,101 @@
+<?xml version='1.0'?>
+
+<trace enabled="yes"
+ home="@sub_PREFIXDIR@"
+ initial-mode="detail"
+ type="paraver"
+>
+  
+ <pthread enabled="yes">
+    <locks enabled="no" />
+    <counters enabled="yes" />
+  </pthread>
+
+  <counters enabled="yes">
+    <cpu enabled="yes" starting-set-distribution="1">
+       <set enabled="yes" domain="all" changeat-time="0">
+        PAPI_TOT_INS,PAPI_TOT_CYC
+      </set>
+      <set enabled="no" domain="all" changeat-time="0">
+        PAPI_TOT_INS,PAPI_TOT_CYC,PAPI_L1_DCM,PAPI_L2_DCM,PAPI_L3_TCM,PAPI_BR_INS,PAPI_BR_MSP,RESOURCE_STALLS
+      </set>
+      <set enabled="no" domain="all" changeat-time="0">
+        PAPI_TOT_INS,PAPI_TOT_CYC,PAPI_VEC_SP,PAPI_SR_INS,PAPI_LD_INS,PAPI_FP_INS
+        <sampling enabled="no" period="1000000000">PAPI_TOT_CYC</sampling>
+      </set>
+    </cpu>
+
+    <network enabled="no" />
+
+    <resource-usage enabled="no" />
+
+    <memory-usage enabled="no" />
+  </counters>
+
+<pebs-sampling enabled="yes">
+  <loads  enabled="yes" frequency="100" minimum-latency="10" />
+  <stores enabled="yes" frequency="100" />
+  <load-l3-misses enabled="yes" frequency="100" />
+</pebs-sampling>
+
+  <callers enabled="yes">
+    <mpi enabled="no">1-5</mpi>
+    <sampling enabled="no">1-5</sampling>
+        <dynamic-memory enabled="yes">1-10</dynamic-memory>
+        <input-output enabled="no">1-3</input-output>
+        <syscall enabled="no">1-3</syscall>
+  </callers>
+
+  <storage enabled="no">
+    <trace-prefix enabled="yes">TRACE</trace-prefix>
+    <size enabled="no">5</size>
+    <temporal-directory enabled="yes">/scratch</temporal-directory>
+    <final-directory enabled="yes">/gpfs/scratch/bsc41/bsc41273</final-directory>
+  </storage>
+
+  <buffer enabled="yes">
+    <size enabled="yes">5000000</size>
+    <circular enabled="no" />
+  </buffer>
+
+  <trace-control enabled="yes">
+    <file enabled="no" frequency="5M">/gpfs/scratch/bsc41/bsc41273/control</file>
+    <global-ops enabled="no"></global-ops>
+  </trace-control>
+
+  <others enabled="yes">
+    <minimum-time enabled="no">10M</minimum-time>
+    <finalize-on-signal enabled="no" 
+      SIGUSR1="no" SIGUSR2="no" SIGINT="yes"
+      SIGQUIT="yes" SIGTERM="yes" SIGXCPU="yes"
+      SIGFPE="yes" SIGSEGV="yes" SIGABRT="yes"
+    />
+    <flush-sampling-buffer-at-instrumentation-point enabled="yes" />
+  </others>
+
+  <sampling enabled="no" type="virtual" period="50m" variability="10m" />
+
+  <dynamic-memory enabled="yes" >
+   <alloc enabled="yes" threshold="4096" />
+   <free  enabled="yes" />
+ </dynamic-memory>
+
+
+  <input-output enabled="no" internals="no"/>
+
+  <syscall enabled="no" />
+
+  <merge enabled="yes" 
+    synchronization="default"
+    tree-fan-out="16"
+    max-memory="512"
+    joint-states="yes"
+    keep-mpits="yes"
+    translate-addresses="yes"
+    sort-addresses="no"
+    translate-data-addresses="no"
+    overwrite="yes"
+  >
+ </merge>
+
+</trace>
