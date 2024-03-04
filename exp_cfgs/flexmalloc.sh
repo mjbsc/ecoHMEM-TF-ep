@@ -1,6 +1,5 @@
 #!/bin/bash
 
-#FLEXMALLOC_HOME=/home/helshazly/ecohmem/flexmalloc/install
 
 library=libflexmalloc
 if [[ ${FLEXMALLOC_DEBUG} == "1" ]] || [[ ${FLEXMALLOC_DEBUG} == "enabled" ]] || [[ ${FLEXMALLOC_DEBUG} == "yes" ]] ; then
